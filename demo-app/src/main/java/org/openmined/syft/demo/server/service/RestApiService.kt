@@ -1,6 +1,7 @@
 package org.openmined.syft.demo.server.service
 
 import org.openmined.syft.demo.server.model.LoginReq
+import org.openmined.syft.demo.server.model.PredictionReq
 import org.openmined.syft.demo.server.model.SignUpReq
 import org.openmined.syft.demo.server.model.responseUser
 import org.openmined.syft.demo.server.model.testData
@@ -53,19 +54,87 @@ class RestApiService {
         )
     }
 
-    /*fun getUserData(onResult: (testData?) -> Unit) {
+    fun getUserData(onResult: (responseUser?) -> Unit) {
         val retrofit = ServiceBuilder.buildService(ApiService::class.java)
         retrofit.getUserData(SessionManager.USER_TOKEN).enqueue(
-            object : Callback<testData> {
-                override fun onFailure(call: Call<testData>, t: Throwable) {
+            object : Callback<responseUser> {
+                override fun onFailure(call: Call<responseUser>, t: Throwable) {
                     onResult(null)
                 }
-                override fun onResponse( call: Call<testData>, response: Response<testData>) {
-                    val addedUser = response.body()
-                    onResult(addedUser)
+                override fun onResponse( call: Call<responseUser>, response: Response<responseUser>) {
+                    if(response != null){
+                        var isSuccess = response.body();
+                        if (isSuccess != null) {
+                            val addedUser = isSuccess
+                            onResult(addedUser)
+                        }
+                    }
+
                 }
             }
         )
+    }
 
-    }*/
+    fun addPrediction(predData: PredictionReq, onResult: (responseUser?) -> Unit) {
+        val retrofit = ServiceBuilder.buildService(ApiService::class.java)
+        retrofit.addPrediction(predData, SessionManager.USER_TOKEN).enqueue(
+            object : Callback<responseUser> {
+                override fun onFailure(call: Call<responseUser>, t: Throwable) {
+                    onResult(null)
+                }
+                override fun onResponse( call: Call<responseUser>, response: Response<responseUser>) {
+                    if(response != null){
+                        var isSuccess = response.body();
+                        if (isSuccess != null) {
+                            val addedUser = isSuccess
+                            onResult(addedUser)
+                        }
+                    }
+
+                }
+            }
+        )
+    }
+
+    fun getLatestPrediction(onResult: (responseUser?) -> Unit) {
+        val retrofit = ServiceBuilder.buildService(ApiService::class.java)
+        retrofit.getLatestPrediction(SessionManager.USER_TOKEN).enqueue(
+            object : Callback<responseUser> {
+                override fun onFailure(call: Call<responseUser>, t: Throwable) {
+                    onResult(null)
+                }
+                override fun onResponse( call: Call<responseUser>, response: Response<responseUser>) {
+                    if(response != null){
+                        var isSuccess = response.body();
+                        if (isSuccess != null) {
+                            val addedUser = isSuccess
+                            onResult(addedUser)
+                        }
+                    }
+
+                }
+            }
+        )
+    }
+
+    fun getAllPredictions(onResult: (responseUser?) -> Unit) {
+        val retrofit = ServiceBuilder.buildService(ApiService::class.java)
+        retrofit.getAllPredictions(SessionManager.USER_TOKEN).enqueue(
+            object : Callback<responseUser> {
+                override fun onFailure(call: Call<responseUser>, t: Throwable) {
+                    onResult(null)
+                }
+                override fun onResponse( call: Call<responseUser>, response: Response<responseUser>) {
+                    if(response != null){
+                        var isSuccess = response.body();
+                        if (isSuccess != null) {
+                            val addedUser = isSuccess
+                            onResult(addedUser)
+                        }
+                    }
+
+                }
+            }
+        )
+    }
 }

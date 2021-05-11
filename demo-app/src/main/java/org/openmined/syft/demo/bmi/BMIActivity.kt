@@ -3,11 +3,16 @@ package org.openmined.syft.demo.bmi
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.view.View
 import android.widget.Button
 import android.widget.EditText
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.wajahatkarim3.easyvalidation.core.view_ktx.validNumber
+import com.wajahatkarim3.easyvalidation.core.view_ktx.validator
+import es.dmoral.toasty.Toasty
 import org.openmined.syft.demo.R
 import org.openmined.syft.demo.databinding.ActivityBMIBinding
 import org.openmined.syft.demo.databinding.ActivityPredictionBinding
@@ -36,13 +41,30 @@ class BMIActivity : AppCompatActivity() {
 
 
         btgetBmi.setOnClickListener(View.OnClickListener {
-            val heightVal:Double = height.text.toString().toDouble()
-            val weightVal:Double = weight.text.toString().toDouble()
+            val heightVal = height.text.toString()
+            val weightVal = weight.text.toString()
 
+           val isValidHeight = heightVal.validator().validNumber().nonEmpty().check()
+           val isValidWeight = weightVal.validator().validNumber().nonEmpty().check()
 
-            val results: Double = weightVal / (heightVal * heightVal)
+            if(!isValidHeight){
+                var toastP = Toasty.error(applicationContext, "Invalid height", Toast.LENGTH_SHORT, true);
+                toastP.setGravity(Gravity.TOP, 0 ,25);
+                toastP.show()
+                return@OnClickListener
+            }
 
-            result.setText(results.toString())
+            if(!isValidWeight){
+                var toastP = Toasty.error(applicationContext, "Invalid weight", Toast.LENGTH_SHORT, true);
+                toastP.setGravity(Gravity.TOP, 0 ,25);
+                toastP.show()
+                return@OnClickListener
+            }
+
+            if(isValidHeight && isValidWeight){
+                val results: Double = weightVal.toDouble() / (heightVal.toDouble() * heightVal.toDouble())
+                result.setText(results.toString())
+            }
 
             })
 
