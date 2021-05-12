@@ -29,8 +29,7 @@ class ReportDetailsActivity : AppCompatActivity() {
 
 
         binding.btnGoBack.setOnClickListener {
-            val intent = Intent(this, ReportActivity::class.java)
-            startActivity(intent)
+            onBackPressed()
         }
 
         val sharedPreferences: SharedPreferences = this.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
@@ -54,7 +53,7 @@ class ReportDetailsActivity : AppCompatActivity() {
         val btHdl = findViewById<TextView>(R.id.textView42)
         val btLdl = findViewById<TextView>(R.id.textView44)
         val btVldl = findViewById<TextView>(R.id.textView45)
-        val btBmi = findViewById<TextView>(R.id.textView46)
+        val btBmi = findViewById<TextView>(R.id.textView53)
 
 
         btAge.setText(age.toString())

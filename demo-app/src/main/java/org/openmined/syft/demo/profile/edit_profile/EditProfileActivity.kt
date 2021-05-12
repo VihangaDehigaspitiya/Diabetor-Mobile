@@ -27,7 +27,7 @@ class EditProfileActivity : AppCompatActivity() {
 
 
         binding.btnCancelUpdate.setOnClickListener {
-            val intent = Intent(this, ProfileActivity::class.java)
-            startActivity(intent)
-        }    }
+            onBackPressed()
+        }
+    }
 }

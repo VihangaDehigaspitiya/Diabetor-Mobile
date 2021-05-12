@@ -191,6 +191,11 @@ class PredictionActivity : AppCompatActivity() {
 
         })
 
+
+        binding.btnCancel.setOnClickListener{
+            onBackPressed()
+        }
+
     }
 
     fun addPrediction(predReq: PredictionReq){

@@ -33,5 +33,9 @@ class ReportActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+        binding.btnCancel.setOnClickListener{
+            onBackPressed()
+        }
+
     }
 }

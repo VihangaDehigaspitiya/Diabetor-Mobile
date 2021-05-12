@@ -54,5 +54,9 @@ class ForgotPasswordActivity : AppCompatActivity() {
                 startActivity(intent)
             }
         }
+
+        binding.btnCancel.setOnClickListener{
+            onBackPressed()
+        }
     }
 }

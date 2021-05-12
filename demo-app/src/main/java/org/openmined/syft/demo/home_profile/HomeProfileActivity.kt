@@ -39,6 +39,10 @@ class HomeProfileActivity : AppCompatActivity() {
             ViewModelProvider.NewInstanceFactory()
         ).get(HomeProfileViewModel::class.java)
 
+        binding.btnCancelUpdate.setOnClickListener {
+            onBackPressed()
+        }
+
         getUserDetails();
         getLatestPrediction();
         val progressBar = findViewById<ProgressBar>(R.id.progressBar3)
