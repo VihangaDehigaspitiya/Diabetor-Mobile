@@ -45,8 +45,8 @@ class HomeProfileActivity : AppCompatActivity() {
 
         getUserDetails();
         getLatestPrediction();
-        val progressBar = findViewById<ProgressBar>(R.id.progressBar3)
-        progressBar.isVisible = false
+        /*val progressBar = findViewById<ProgressBar>(R.id.progressBar3)
+        progressBar.isVisible = false*/
 
         /*val sharedPreferences: SharedPreferences = this.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
         val age = sharedPreferences.getInt("age",0)
@@ -155,8 +155,8 @@ class HomeProfileActivity : AppCompatActivity() {
         apiService.getLatestPrediction {
             if (it?.status == true) {
                 try {
-                        val btAge = findViewById<Button>(R.id.btnAge)
-                        val btGender = findViewById<Button>(R.id.btnGen)
+                        val btAge = findViewById<Button>(R.id.btnUrea)
+                        val btGender = findViewById<Button>(R.id.btnGender)
                         val btCre = findViewById<Button>(R.id.btnCre)
                         val btHbal = findViewById<Button>(R.id.btnHbalc)
                         val btCol = findViewById<Button>(R.id.btnCol)
@@ -169,7 +169,7 @@ class HomeProfileActivity : AppCompatActivity() {
                         val txtGlucoseLevel = findViewById<TextView>(R.id.txtGlucoseLevel)
                         val txtDiabetesResult = findViewById<TextView>(R.id.txtDiabetesResult)
                         val txtType = findViewById<TextView>(R.id.txtType)
-                        val progressBar = findViewById<ProgressBar>(R.id.progressBar3)
+                        //val progressBar = findViewById<ProgressBar>(R.id.progressBar3)
 
 
                         var latestPredictionDataString = it.value.toString();

@@ -48,6 +48,7 @@ class PredictionActivity : AppCompatActivity() {
 
         val txtAge = findViewById<EditText>(R.id.etAge)
         val txtGender = findViewById<EditText>(R.id.etGender)
+        val txtUrea = findViewById<EditText>(R.id.etUrea)
         val txtCre = findViewById<EditText>(R.id.etCre)
         val txtHbAlc = findViewById<EditText>(R.id.etAbl)
         val txtChols = findViewById<EditText>(R.id.etCholest)
@@ -68,6 +69,7 @@ class PredictionActivity : AppCompatActivity() {
         btProceed.setOnClickListener(View.OnClickListener {
             val age: String = txtAge.text.toString()
             val gender: String = txtGender.text.toString()
+            val urea: String = txtUrea.text.toString()
             val crea: String = txtCre.text.toString()
             val hba1c: String = txtHbAlc.text.toString()
             val cholos: String = txtChols.text.toString()
@@ -81,6 +83,7 @@ class PredictionActivity : AppCompatActivity() {
 
             val isValidAge = age.validator().check();
             val isValidGender = gender.validator().check();
+            val isValidUrea = urea.validator().check();
             val isValidCrea = crea.validator().check();
             val isValidHba1c = hba1c.validator().check();
             val isValidCholos = cholos.validator().check();
@@ -92,6 +95,13 @@ class PredictionActivity : AppCompatActivity() {
 
             if(!isValidAge){
                 var toastP = Toasty.error(applicationContext, "Invalid age", Toast.LENGTH_SHORT, true);
+                toastP.setGravity(Gravity.TOP, 0 ,25);
+                toastP.show()
+                return@OnClickListener
+            }
+
+            if(!isValidUrea){
+                var toastP = Toasty.error(applicationContext, "Invalid Urea Value", Toast.LENGTH_SHORT, true);
                 toastP.setGravity(Gravity.TOP, 0 ,25);
                 toastP.show()
                 return@OnClickListener

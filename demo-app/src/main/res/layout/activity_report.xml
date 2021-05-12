@@ -14,9 +14,15 @@
 
     </data>
 
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fillViewport="true">
+
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content">
 
 
         <TextView
@@ -90,11 +96,12 @@
             android:layout_marginEnd="40dp"
             android:background="@drawable/blue_button_shape"
             android:text="View Report"
+            android:visibility="gone"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="1.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recyclerView" />
+            app:layout_constraintTop_toBottomOf="@+id/rvReport" />
 
         <Button
             android:id="@+id/btnCancel"
@@ -115,14 +122,18 @@
             app:layout_constraintVertical_bias="0.0" />
 
         <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/recyclerView"
+            android:id="@+id/rvReport"
             android:layout_width="0dp"
-            android:layout_height="200dp"
+            android:layout_height="300dp"
             android:layout_marginStart="16dp"
+            android:layout_marginTop="4dp"
             android:layout_marginEnd="16dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView18" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </ScrollView>
+
 
 </layout>
