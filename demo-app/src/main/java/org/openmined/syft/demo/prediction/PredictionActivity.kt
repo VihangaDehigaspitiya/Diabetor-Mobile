@@ -174,7 +174,7 @@ class PredictionActivity : AppCompatActivity() {
                && isValidBmi){
                 progressBar.isVisible = true
                 val predictionData = PredictionReq(gender, Integer.parseInt(age), crea.toDouble(), hba1c.toDouble(), cholos.toDouble(),
-                    trigy.toDouble(), hdl.toDouble(), ldl.toDouble(), vldl.toDouble(), bmi.toDouble(), 10.0
+                    trigy.toDouble(), hdl.toDouble(), ldl.toDouble(), vldl.toDouble(), bmi.toDouble(), urea.toDouble()
                 )
                 Handler().postDelayed({
                     progressBar.isVisible = false
