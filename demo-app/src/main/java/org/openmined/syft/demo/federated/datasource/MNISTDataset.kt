@@ -94,7 +94,7 @@ class MNISTDataset(private val resources: Resources) : Dataset {
 
     private fun returnDataReader() = BufferedReader(
         InputStreamReader(
-            resources.openRawResource(R.raw.pixels)
+            resources.openRawResource(R.raw.diabetes)
         )
     )
 

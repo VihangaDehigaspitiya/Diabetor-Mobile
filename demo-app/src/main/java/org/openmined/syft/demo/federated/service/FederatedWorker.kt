@@ -50,7 +50,7 @@ class FederatedWorker(
 
     override suspend fun doWork(): Result {
         val authToken = inputData.getString(AUTH_TOKEN) ?: return Result.failure()
-        val baseUrl = inputData.getString(BASE_URL) ?: return Result.failure()
+        val baseUrl = "http://35.198.249.218:5000"
         val modelName = inputData.getString(MODEL_NAME) ?: return Result.failure()
         val modelVersion = inputData.getString(MODEL_VERSION) ?: return Result.failure()
 
