@@ -13,7 +13,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".bmi.BMIActivity"></activity>
+        <activity android:name=".bmi.BMIActivity"/>
         <activity android:name=".profile.edit_profile.EditProfileActivity" />
         <activity
             android:name=".report.report_details.ReportDetailsActivity"

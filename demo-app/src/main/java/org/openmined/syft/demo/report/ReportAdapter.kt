@@ -10,12 +10,19 @@ import androidx.recyclerview.widget.RecyclerView
 import org.openmined.syft.demo.R
 import org.openmined.syft.demo.server.model.ReportData
 
-internal class ReportAdapter(private var reportList: List<ReportData>) :
+internal class ReportAdapter(
+    private var reportList: List<ReportData>,
+    val listener:ReportListener
+) :
     RecyclerView.Adapter<ReportAdapter.MyViewHolder>() {
     internal inner class MyViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         var result: TextView = view.findViewById(R.id.txtResult)
         var year: TextView = view.findViewById(R.id.txtDate)
         var clReport: ConstraintLayout = view.findViewById(R.id.clReport)
+    }
+
+    interface ReportListener{
+        fun onBranchClicked(report:ReportData,position: Int)
     }
 
     @NonNull
@@ -31,9 +38,7 @@ internal class ReportAdapter(private var reportList: List<ReportData>) :
         holder.year.text = movie.getYear()
 
         holder.clReport.setOnClickListener {
-            reportList.get(position)
-
-        }
+            listener.onBranchClicked(reportList[position],position)        }
     }
 
     override fun getItemCount(): Int {

@@ -23,7 +23,7 @@ import org.openmined.syft.demo.server.service.RestApiService
 import java.io.StringReader
 import java.lang.reflect.Type
 
-class ReportActivity : AppCompatActivity() {
+class ReportActivity : AppCompatActivity(),ReportAdapter.ReportListener  {
     private lateinit var reportViewModel: ReportViewModel
     private lateinit var binding: ActivityReportBinding
    // private val reportList = ArrayList<ReportData>()
@@ -67,7 +67,7 @@ class ReportActivity : AppCompatActivity() {
                     val listType: Type = object : TypeToken<ArrayList<ReportData>>() {}.getType()
                     var predictionList: List<ReportData> = Gson().fromJson(predictionString, listType);
                     val recyclerView: RecyclerView = findViewById(R.id.rvReport)
-                    reportAdapter = ReportAdapter(predictionList)
+                    reportAdapter = ReportAdapter(predictionList,this)
                     val layoutManager = LinearLayoutManager(applicationContext)
                     recyclerView.layoutManager = layoutManager
                     recyclerView.itemAnimator = DefaultItemAnimator()
@@ -89,6 +89,11 @@ class ReportActivity : AppCompatActivity() {
                 toastP.show()
             }
         }
+    }
+
+    override fun onBranchClicked(report: ReportData, position: Int) {
+        val intent = Intent(this, ReportDetailsActivity::class.java)
+        startActivity(intent)
     }
 
 
