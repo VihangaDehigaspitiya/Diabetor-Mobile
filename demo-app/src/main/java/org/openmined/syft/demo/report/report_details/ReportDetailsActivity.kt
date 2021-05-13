@@ -5,13 +5,22 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Gravity
 import android.widget.Button
 import android.widget.TextView
+import android.widget.Toast
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
+import com.google.gson.Gson
+import com.google.gson.reflect.TypeToken
+import es.dmoral.toasty.Toasty
 import org.openmined.syft.demo.R
 import org.openmined.syft.demo.databinding.ActivityReportDetailsBinding
 import org.openmined.syft.demo.report.ReportActivity
+import org.openmined.syft.demo.server.model.PredictionData
+import org.openmined.syft.demo.server.model.ReportData
+import org.openmined.syft.demo.server.service.RestApiService
+import java.lang.reflect.Type
 
 class ReportDetailsActivity : AppCompatActivity() {
     private val sharedPrefFile = "savedData"
@@ -32,39 +41,58 @@ class ReportDetailsActivity : AppCompatActivity() {
             onBackPressed()
         }
 
-        val sharedPreferences: SharedPreferences = this.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
-        val age = sharedPreferences.getInt("age",0)
-        val gender = sharedPreferences.getString("gender","defaultname")
-        val crea = sharedPreferences.getString("crea","defaultname")
-        val hbalc = sharedPreferences.getString("hbalc","defaultname")
-        val cholos = sharedPreferences.getString("cholos","defaultname")
-        val trigy = sharedPreferences.getString("trigy","defaultname")
-        val hdl = sharedPreferences.getString("hdl","defaultname")
-        val ldl = sharedPreferences.getString("ldl","defaultname")
-        val vldl = sharedPreferences.getString("vldl","defaultname")
-        val bmi = sharedPreferences.getString("bmi","defaultname")
+        val id  = intent.getStringExtra("Id")
 
-        val btAge = findViewById<TextView>(R.id.textView38)
-        val btGender = findViewById<TextView>(R.id.textView37)
-        val btCre = findViewById<TextView>(R.id.textView39)
-        val btHbal = findViewById<TextView>(R.id.textView41)
-        val btCol = findViewById<TextView>(R.id.textView40)
-        val btTrigy = findViewById<TextView>(R.id.textView43)
-        val btHdl = findViewById<TextView>(R.id.textView42)
-        val btLdl = findViewById<TextView>(R.id.textView44)
-        val btVldl = findViewById<TextView>(R.id.textView45)
-        val btBmi = findViewById<TextView>(R.id.textView53)
+        getPredictionDetails(id)
 
+    }
 
-        btAge.setText(age.toString())
-        btGender.setText(gender.toString())
-        btBmi.setText(bmi.toString())
-        btCre.setText(crea.toString())
-        btHbal.setText(hbalc.toString())
-        btCol.setText(cholos.toString())
-        btTrigy.setText(trigy.toString())
-        btHdl.setText(hdl.toString())
-        btLdl.setText(ldl.toString())
-        btVldl.setText(vldl.toString())
+    fun getPredictionDetails(id: String){
+        val apiService = RestApiService()
+        apiService.getPredictionDetails(id) {
+            if (it?.status == true) {
+                try{
+                    var predictionString = it.value.toString();
+                    val listType: Type = object : TypeToken<PredictionData>() {}.getType()
+                    var predictionDetails: PredictionData = Gson().fromJson(predictionString, listType);
+                    val btAge = findViewById<TextView>(R.id.textView38)
+                    val btGender = findViewById<TextView>(R.id.textView37)
+                    val btCre = findViewById<TextView>(R.id.textView39)
+                    val btHbal = findViewById<TextView>(R.id.textView41)
+                    val btCol = findViewById<TextView>(R.id.textView40)
+                    val btTrigy = findViewById<TextView>(R.id.textView43)
+                    val btHdl = findViewById<TextView>(R.id.textView42)
+                    val btLdl = findViewById<TextView>(R.id.textView44)
+                    val btVldl = findViewById<TextView>(R.id.textView45)
+                    val btBmi = findViewById<TextView>(R.id.textView53)
+                    val btUrea = findViewById<TextView>(R.id.txtUrea)
+
+                    btAge.setText(predictionDetails.age.toString())
+                    btGender.setText(predictionDetails.gender)
+                    btBmi.setText(predictionDetails.BMI.toString())
+                    btCre.setText(predictionDetails.creatinineRatio.toString())
+                    btHbal.setText(predictionDetails.hbA1C.toString())
+                    btCol.setText(predictionDetails.cholesterol.toString())
+                    btTrigy.setText(predictionDetails.triglycerids.toString())
+                    btHdl.setText(predictionDetails.HDL.toString())
+                    btLdl.setText(predictionDetails.LDL.toString())
+                    btVldl.setText(predictionDetails.VLDL.toString())
+                    btUrea.setText(predictionDetails.urea.toString())
+
+                }catch (e: Exception){
+                    print(e)
+                }
+
+            } else {
+                var toastP = Toasty.error(
+                    applicationContext,
+                    it?.message.toString(),
+                    Toast.LENGTH_SHORT,
+                    true
+                );
+                toastP.setGravity(Gravity.TOP, 0, 25);
+                toastP.show()
+            }
+        }
     }
 }

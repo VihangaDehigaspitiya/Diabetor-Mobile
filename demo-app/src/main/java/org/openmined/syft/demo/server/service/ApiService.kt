@@ -15,7 +15,7 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
-
+import retrofit2.http.Path
 
 
 interface ApiService {
@@ -41,5 +41,8 @@ interface ApiService {
 
     @POST("/prediction")
     fun addPrediction (@Body request: PredictionReq, @Header("Authorization") token: String): Call<responseUser>
+
+    @GET("/prediction/{id}")
+    fun getPredictionDetails (@Path(value = "id", encoded = false) key: String, @Header("Authorization") token: String): Call<responseUser>
 
 }

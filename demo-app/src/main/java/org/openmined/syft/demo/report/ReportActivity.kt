@@ -93,7 +93,9 @@ class ReportActivity : AppCompatActivity(),ReportAdapter.ReportListener  {
 
     override fun onBranchClicked(report: ReportData, position: Int) {
         val intent = Intent(this, ReportDetailsActivity::class.java)
+        intent.putExtra("Id", report.getId())
         startActivity(intent)
+
     }
 
 
