@@ -124,8 +124,6 @@ class HomeProfileActivity : AppCompatActivity() {
 
 
 
-
-
     }
 
     fun getUserDetails() {
@@ -153,25 +151,23 @@ class HomeProfileActivity : AppCompatActivity() {
     fun getLatestPrediction() {
         val apiService = RestApiService()
         apiService.getLatestPrediction {
+            val btnUrea = findViewById<Button>(R.id.btnUrea)
+            val btGender = findViewById<Button>(R.id.btnGender)
+            val btCre = findViewById<Button>(R.id.btnCre)
+            val btHbal = findViewById<Button>(R.id.btnHbalc)
+            val btCol = findViewById<Button>(R.id.btnCol)
+            val btTrigy = findViewById<Button>(R.id.btnTrigy)
+            val btHdl = findViewById<Button>(R.id.btnHdl)
+            val btLdl = findViewById<Button>(R.id.btnLdl)
+            val btVldl = findViewById<Button>(R.id.btnVldl)
+            val btBmi = findViewById<Button>(R.id.btBmi)
+
+            val txtGlucoseLevel = findViewById<TextView>(R.id.txtGlucoseLevel)
+            val txtDiabetesResult = findViewById<TextView>(R.id.txtDiabetesResult)
+            val txtType = findViewById<TextView>(R.id.txtType)
             if (it?.status == true) {
                 try {
-                        val btnUrea = findViewById<Button>(R.id.btnUrea)
-                        val btGender = findViewById<Button>(R.id.btnGender)
-                        val btCre = findViewById<Button>(R.id.btnCre)
-                        val btHbal = findViewById<Button>(R.id.btnHbalc)
-                        val btCol = findViewById<Button>(R.id.btnCol)
-                        val btTrigy = findViewById<Button>(R.id.btnTrigy)
-                        val btHdl = findViewById<Button>(R.id.btnHdl)
-                        val btLdl = findViewById<Button>(R.id.btnLdl)
-                        val btVldl = findViewById<Button>(R.id.btnVldl)
-                        val btBmi = findViewById<Button>(R.id.btBmi)
-
-                        val txtGlucoseLevel = findViewById<TextView>(R.id.txtGlucoseLevel)
-                        val txtDiabetesResult = findViewById<TextView>(R.id.txtDiabetesResult)
-                        val txtType = findViewById<TextView>(R.id.txtType)
                         //val progressBar = findViewById<ProgressBar>(R.id.progressBar3)
-
-
                         var latestPredictionDataString = it.value.toString();
                         val listType: Type = object : TypeToken<PredictionData>() {}.getType()
                         var latestPrediction = Gson().fromJson<PredictionData>(
@@ -205,10 +201,39 @@ class HomeProfileActivity : AppCompatActivity() {
                             } else {
                                 txtType.setText("Diabetes")
                             }
+                        }else{
+                            btnUrea.setText("Urea \n N/A")
+                            btGender.setText("Gender \n N/A")
+                            btBmi.setText("BMI \n N/A")
+                            btCre.setText("Creatinine Ratio \n N/A")
+                            btHbal.setText("HBA1C \n N/A")
+                            btCol.setText("Cholesterol \n N/A")
+                            btTrigy.setText("Triglycerides \n N/A")
+                            btHdl.setText("HDL \n N/A")
+                            btLdl.setText("LDL \n N/A")
+                            btVldl.setText("VLDL \n N/A")
+
+                            txtDiabetesResult.setText("N/A")
+                            txtType.setText("N/A")
+                            txtGlucoseLevel.setText("N/A")
                         }
 
                 }catch (e: Exception){
                     print(e)
+                    btnUrea.setText("Urea \n N/A")
+                    btGender.setText("Gender \n N/A")
+                    btBmi.setText("BMI \n N/A")
+                    btCre.setText("Creatinine Ratio \n N/A")
+                    btHbal.setText("HBA1C \n N/A")
+                    btCol.setText("Cholesterol \n N/A")
+                    btTrigy.setText("Triglycerides \n N/A")
+                    btHdl.setText("HDL \n N/A")
+                    btLdl.setText("LDL \n N/A")
+                    btVldl.setText("VLDL \n N/A")
+
+                    txtDiabetesResult.setText("N/A")
+                    txtType.setText("N/A")
+                    txtGlucoseLevel.setText("N/A")
                 }
 
 
