@@ -155,7 +155,7 @@ class HomeProfileActivity : AppCompatActivity() {
         apiService.getLatestPrediction {
             if (it?.status == true) {
                 try {
-                        val btAge = findViewById<Button>(R.id.btnUrea)
+                        val btnUrea = findViewById<Button>(R.id.btnUrea)
                         val btGender = findViewById<Button>(R.id.btnGender)
                         val btCre = findViewById<Button>(R.id.btnCre)
                         val btHbal = findViewById<Button>(R.id.btnHbalc)
@@ -179,7 +179,7 @@ class HomeProfileActivity : AppCompatActivity() {
                             listType
                         )
                         if (latestPrediction != null) {
-                            btAge.setText("Age \n " + latestPrediction.age.toString())
+                            btnUrea.setText("Urea \n " + latestPrediction.urea.toString())
                             btGender.setText("Gender \n " + latestPrediction.gender)
                             btBmi.setText("BMI \n " + latestPrediction.BMI.toString())
                             btCre.setText("Creatinine Ratio \n" + latestPrediction.creatinineRatio.toString())

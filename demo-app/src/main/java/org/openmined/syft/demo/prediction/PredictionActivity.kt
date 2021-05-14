@@ -46,27 +46,27 @@ class PredictionActivity : AppCompatActivity() {
         ).get(PredictionViewModel::class.java)
 
 
-        val txtAge = findViewById<EditText>(R.id.etAge)
-        val txtGender = findViewById<EditText>(R.id.etGender)
-        val txtUrea = findViewById<EditText>(R.id.etUrea)
-        val txtCre = findViewById<EditText>(R.id.etCre)
-        val txtHbAlc = findViewById<EditText>(R.id.etAbl)
-        val txtChols = findViewById<EditText>(R.id.etCholest)
-        val txtTrigy = findViewById<EditText>(R.id.etTrigly)
-        val txthdl = findViewById<EditText>(R.id.etHDL)
-        val txtLdl = findViewById<EditText>(R.id.etLdl)
-        val txtVldl = findViewById<EditText>(R.id.etVldd)
-        val txtBmi = findViewById<EditText>(R.id.etBmi)
+
 
 
         val btProceed = findViewById<Button>(R.id.button2)
-        val sharedPreferences: SharedPreferences =
-                this.getSharedPreferences(sharedPrefFile, Context.MODE_PRIVATE)
         val progressBar = findViewById<ProgressBar>(R.id.progressBar5)
 
         progressBar.isVisible = false
 
         btProceed.setOnClickListener(View.OnClickListener {
+            val txtAge = findViewById<EditText>(R.id.etAge)
+            val txtGender = findViewById<EditText>(R.id.etGender)
+            val txtUrea = findViewById<EditText>(R.id.etUrea)
+            val txtCre = findViewById<EditText>(R.id.etCre)
+            val txtHbAlc = findViewById<EditText>(R.id.etAbl)
+            val txtChols = findViewById<EditText>(R.id.etCholest)
+            val txtTrigy = findViewById<EditText>(R.id.etTrigly)
+            val txthdl = findViewById<EditText>(R.id.etHDL)
+            val txtLdl = findViewById<EditText>(R.id.etLdl)
+            val txtVldl = findViewById<EditText>(R.id.etVldd)
+            val txtBmi = findViewById<EditText>(R.id.etBmi)
+
             val age: String = txtAge.text.toString()
             val gender: String = txtGender.text.toString()
             val urea: String = txtUrea.text.toString()
@@ -81,17 +81,17 @@ class PredictionActivity : AppCompatActivity() {
 
 
 
-            val isValidAge = age.validator().check();
-            val isValidGender = gender.validator().check();
-            val isValidUrea = urea.validator().check();
-            val isValidCrea = crea.validator().check();
-            val isValidHba1c = hba1c.validator().check();
-            val isValidCholos = cholos.validator().check();
-            val isValidTrigy = trigy.validator().check();
-            val isValidHdl = hdl.validator().check();
-            val isValidLdl = ldl.validator().check();
-            val isValidVldl = vldl.validator().check();
-            val isValidBmi = bmi.validator().check();
+            val isValidAge = age.validator().nonEmpty().check();
+            val isValidGender = gender.validator().nonEmpty().check();
+            val isValidUrea = urea.validator().nonEmpty().check();
+            val isValidCrea = crea.validator().nonEmpty().check();
+            val isValidHba1c = hba1c.validator().nonEmpty().check();
+            val isValidCholos = cholos.validator().nonEmpty().check();
+            val isValidTrigy = trigy.validator().nonEmpty().check();
+            val isValidHdl = hdl.validator().nonEmpty().check();
+            val isValidLdl = ldl.validator().nonEmpty().check();
+            val isValidVldl = vldl.validator().nonEmpty().check();
+            val isValidBmi = bmi.validator().nonEmpty().check();
 
             if(!isValidAge){
                 var toastP = Toasty.error(applicationContext, "Invalid age", Toast.LENGTH_SHORT, true);
