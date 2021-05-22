@@ -45,21 +45,41 @@ class SignUpActivity : AppCompatActivity() {
             val emailText = findViewById<EditText>(R.id.tv_email)
             val passwordText = findViewById<EditText>(R.id.et_password)
             val confirmPasswordText = findViewById<EditText>(R.id.et_confirm_password)
-            val nameText = findViewById<EditText>(R.id.et_first_name)
+            val nameText = findViewById<EditText>(R.id.et_first_name);
+            val ageText = findViewById<EditText>(R.id.et_age);
+            val genderText = findViewById<EditText>(R.id.et_gender);
 
             var email = emailText.text.toString();
             var password = passwordText.text.toString();
             var confirmPassword = confirmPasswordText.text.toString();
             var name = nameText.text.toString();
+            var age = ageText.text.toString();
+            var gender = genderText.text.toString();
 
             var isEmailValid = true;
             var isValidPassword = password.validator().nonEmpty().check();
             var isValidConfirmPassword = confirmPassword.validator().nonEmpty().check();
             var isValidName = name.validator().nonEmpty().check();
+            var isValidAge = age.validator().nonEmpty().validNumber().check();
+            var isValidGender = name.validator().nonEmpty().check();
 
 
             if(!isValidName){
                 var toast = Toasty.error(applicationContext, "Name is required", Toast.LENGTH_SHORT, true);
+                toast.setGravity(Gravity.TOP, 0 ,25);
+                toast.show();
+                return@setOnClickListener;
+            }
+
+            if(!isValidAge){
+                var toast = Toasty.error(applicationContext, "Age is required", Toast.LENGTH_SHORT, true);
+                toast.setGravity(Gravity.TOP, 0 ,25);
+                toast.show();
+                return@setOnClickListener;
+            }
+
+            if(!isValidGender){
+                var toast = Toasty.error(applicationContext, "Gender is required", Toast.LENGTH_SHORT, true);
                 toast.setGravity(Gravity.TOP, 0 ,25);
                 toast.show();
                 return@setOnClickListener;
@@ -74,6 +94,20 @@ class SignUpActivity : AppCompatActivity() {
 
             if(!isValidConfirmPassword){
                 var toast = Toasty.error(applicationContext, "Confirm Password is required", Toast.LENGTH_SHORT, true);
+                toast.setGravity(Gravity.TOP, 0 ,25);
+                toast.show();
+                return@setOnClickListener;
+            }
+
+            if(!isValidAge){
+                var toast = Toasty.error(applicationContext, "Age is required", Toast.LENGTH_SHORT, true);
+                toast.setGravity(Gravity.TOP, 0 ,25);
+                toast.show();
+                return@setOnClickListener;
+            }
+
+            if(!isValidGender){
+                var toast = Toasty.error(applicationContext, "Gender is required", Toast.LENGTH_SHORT, true);
                 toast.setGravity(Gravity.TOP, 0 ,25);
                 toast.show();
                 return@setOnClickListener;
@@ -94,18 +128,18 @@ class SignUpActivity : AppCompatActivity() {
                 return@validEmail;
             }
 
-            if(isEmailValid && isValidConfirmPassword && isValidName && isValidPassword){
+            if(isEmailValid && isValidConfirmPassword && isValidName && isValidPassword && isValidAge && isValidGender){
                 //val intent = Intent(this, SignInActivity::class.java)
                 //startActivity(intent)
-                signUpDetails(email, password, name)
+                signUpDetails(email, password, name, gender, Integer.parseInt(age))
             }
 
         }
     }
 
-    fun signUpDetails(email: String, password: String, name: String) {
+    fun signUpDetails(email: String, password: String, name: String, gender: String, age: Int) {
         val apiService = RestApiService()
-        val userinfo = SignUpReq (email = email, password = password, name = name)
+        val userinfo = SignUpReq (email = email, password = password, name = name, gender = gender, age = age)
         apiService.signup(userinfo) {
             if (it?.status == true) {
                 var toast = Toasty.success(applicationContext, it?.message.toString(), Toast.LENGTH_SHORT, true);

@@ -16,6 +16,9 @@ import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
 import es.dmoral.toasty.Toasty
+import kotlinx.android.synthetic.main.activity_home_profile.textView10
+import kotlinx.android.synthetic.main.activity_home_profile.textView11
+import kotlinx.android.synthetic.main.activity_home_profile.textView12
 import kotlinx.android.synthetic.main.activity_home_profile.textView9
 import kotlinx.android.synthetic.main.activity_home_profile.txtUserNameTop
 import org.openmined.syft.demo.R
@@ -134,7 +137,10 @@ class HomeProfileActivity : AppCompatActivity() {
                 val listType: Type = object : TypeToken<UserData?>() {}.getType()
                 var userData: UserData = Gson().fromJson(userDataString, listType)
                 txtUserNameTop.setText(userData.name);
-                textView9.setText(userData.name)
+                textView9.setText(userData.name);
+                textView10.setText(userData.age.toString())
+                textView11.setText(userData.gender)
+                textView12.setText(userData.email)
             } else {
                 var toastP = Toasty.error(
                     applicationContext,

@@ -13,6 +13,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.google.gson.Gson
 import com.google.gson.reflect.TypeToken
+import com.google.gson.stream.JsonReader
 import com.wajahatkarim3.easyvalidation.core.view_ktx.validEmail
 import com.wajahatkarim3.easyvalidation.core.view_ktx.validator
 import es.dmoral.toasty.Toasty
@@ -21,10 +22,13 @@ import org.openmined.syft.demo.databinding.ActivitySignInBinding
 import org.openmined.syft.demo.forgot_password.ForgotPasswordActivity
 import org.openmined.syft.demo.home.HomeActivity
 import org.openmined.syft.demo.server.model.LoginReq
+import org.openmined.syft.demo.server.model.UserData
 import org.openmined.syft.demo.server.model.UserValue
 import org.openmined.syft.demo.server.service.RestApiService
 import org.openmined.syft.demo.server.service.SessionManager
 import org.openmined.syft.demo.signup.SignUpActivity
+import java.io.StringReader
+import java.lang.Exception
 import java.lang.reflect.Type
 
 class SignInActivity : AppCompatActivity() {
@@ -99,22 +103,33 @@ class SignInActivity : AppCompatActivity() {
         val apiService = RestApiService()
         val userinfo = LoginReq (email = email, password = password)
         apiService.login(userinfo) {
-            if (it?.status == true) {
-                var userDataString = it.value.toString();
-                val listType: Type = object : TypeToken<UserValue?>() {}.getType()
-                var userData: UserValue = Gson().fromJson(userDataString, listType)
-                //userData.
-                var token = "Bearer " + userData.token;
-                val sessionManager = SessionManager(applicationContext);
-                sessionManager.saveAuthToken(token)
-                val intent = Intent(this, HomeActivity::class.java)
-                startActivity(intent)
-                print(it?.value)
-            } else {
-                var toastP = Toasty.error(applicationContext, it?.message.toString(), Toast.LENGTH_SHORT, true);
+//            try{
+                if (it?.status == true) {
+                    var userDataString = it.value.toString();
+                    /*val gson = Gson()
+                    val reader = JsonReader(StringReader(userDataString))
+                    reader.setLenient(true)
+                    val userData: UserValue = gson.fromJson(reader, UserValue::class.java)*/
+                    val listType: Type = object : TypeToken<UserValue?>() {}.getType()
+                    var userData: UserValue = Gson().fromJson(userDataString, listType)
+                    //userData.
+                    var token = "Bearer " + userData.token;
+                    val sessionManager = SessionManager(applicationContext);
+                    sessionManager.saveAuthToken(token)
+                    val intent = Intent(this, HomeActivity::class.java)
+                    startActivity(intent)
+                    print(it?.value)
+                } else {
+                    var toastP = Toasty.error(applicationContext, it?.message.toString(), Toast.LENGTH_SHORT, true);
+                    toastP.setGravity(Gravity.TOP, 0 ,25);
+                    toastP.show()
+                }
+            /*}catch (e: Exception){
+                var toastP = Toasty.error(applicationContext, e.message.toString(), Toast.LENGTH_SHORT, true);
                 toastP.setGravity(Gravity.TOP, 0 ,25);
                 toastP.show()
-            }
+            }*/
+
         }
     }
 

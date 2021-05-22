@@ -7,6 +7,7 @@ import org.openmined.syft.demo.server.model.LoginReq
 import org.openmined.syft.demo.server.model.LoginResponse
 import org.openmined.syft.demo.server.model.PredictionReq
 import org.openmined.syft.demo.server.model.SignUpReq
+import org.openmined.syft.demo.server.model.UpdateUserReq
 import org.openmined.syft.demo.server.model.responseUser
 import org.openmined.syft.demo.server.model.testData
 import retrofit2.Call
@@ -15,6 +16,7 @@ import retrofit2.http.FormUrlEncoded
 import retrofit2.http.GET
 import retrofit2.http.Header
 import retrofit2.http.POST
+import retrofit2.http.PUT
 import retrofit2.http.Path
 
 
@@ -32,6 +34,9 @@ interface ApiService {
 
     @GET("/user/me")
     fun getUserData (@Header("Authorization") token: String): Call<responseUser>
+
+    @PUT("/user")
+    fun updateUserDetails (@Body request: UpdateUserReq, @Header("Authorization") token: String): Call<responseUser>
 
     @GET("/prediction/latest/one")
     fun getLatestPrediction (@Header("Authorization") token: String): Call<responseUser>
