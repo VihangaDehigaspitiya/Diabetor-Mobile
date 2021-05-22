@@ -56,6 +56,46 @@
                     app:layout_constraintTop_toBottomOf="@+id/imageView10" />
 
                 <EditText
+                    android:id="@+id/et_gender"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="30dp"
+                    android:backgroundTint="@color/colorBlack"
+                    android:ems="10"
+                    android:hint="Gender"
+                    android:inputType="textPersonName"
+                    android:paddingStart="3dp"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHint="@color/colorBlack"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_age" />
+
+                <EditText
+                    android:id="@+id/et_age"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginEnd="30dp"
+                    android:backgroundTint="@color/colorBlack"
+                    android:ems="10"
+                    android:hint="Age"
+                    android:inputType="number"
+                    android:paddingStart="3dp"
+                    android:textColor="@color/colorBlack"
+                    android:textColorHint="@color/colorBlack"
+                    android:textSize="15sp"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/et_first_name" />
+
+                <EditText
                     android:id="@+id/tv_email"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
@@ -72,7 +112,7 @@
                     android:textSize="15sp"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/et_first_name" />
+                    app:layout_constraintTop_toBottomOf="@+id/et_gender" />
 
                 <EditText
                     android:id="@+id/et_password"
